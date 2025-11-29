@@ -26,7 +26,7 @@ if(!empty($_POST["busca"])){
             
         case 'qtd':
             $qtdbusca= intval($busca);
-            $sql_busca=" WHERE qtd_memebros = '$qtdbusca'   ";
+            $sql_busca=" WHERE qtd_membros = '$qtdbusca'   ";
             break;
             
         case 'nome':
@@ -58,7 +58,7 @@ if(!empty($_GET["ordem"])){
 }
 
 
-$sql = "SELECT id_art, nome_art, genero_musica, qtd_membros, pais_origem FROM artista  ORDER BY $ordem";
+$sql = "SELECT id_art, nome_art, genero_musica, qtd_membros, pais_origem FROM artista $sql_busca ORDER BY $ordem";
 $stmt = $conn->query($sql);
 
 
@@ -95,7 +95,7 @@ if($exibir_busca){
 ?>
 <div class="alert alert-secondary">
     Resultados para: <b><?=$busca?></b>
-    <a href="listagemart.php?ordem=<?=$ordem?>">limpar</a>
+    - <a href="listagemart.php?ordem=<?=$ordem?>">limpar</a>
     
 </div>
 <?php    
@@ -163,10 +163,10 @@ if($stmt->rowCount() == 0){
                 </a></th>
                 <th scope="col" style="widht: 30%;">Gênero</th>
                 <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"qtd desc":"qtd";?>">Quantidade de Membros
-                    <?php if ($ordem == "qnt") echo"⬇️"; ?>
-                    <?php if ($ordem =="qnt desc") echo "⬆️";?>
+                    <?php if ($ordem == "qtd") echo"⬇️"; ?>
+                    <?php if ($ordem =="qtd desc") echo "⬆️";?>
                 </a></th>
-                <th scope="col" style="widht: 30%;">Páis de Origem</th>
+                <th scope="col" style="widht: 30%;">País de Origem</th>
                 <th scope="col" style="widht: 30%;"></th>
             </tr>
         </thead>
@@ -185,11 +185,11 @@ if($stmt->rowCount() == 0){
                         <span data-feather="star" ></span>
                     </a>
                 </td>
-
+            </tr>
+            <?php } ?>
         </tbody>
     </table>
 </div> 
 <?php 
-}
 require 'rodape.php';
 ?>
