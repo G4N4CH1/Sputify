@@ -1,11 +1,13 @@
 <?php 
 session_start();
 require "autenticacao.php";
-$titulo_pagina="Listagem de Funcionários";
+$titulo_pagina="Listagem de Usuários";
 require 'cabecalho.php';
 require 'conexao.php';
+
 $sql= "SELECT id_usu, nome_usu, email, tipo FROM usuario order by id_usu";
 $stmt = $conn->query($sql);
+
 if (isset($_SESSION["result"])) {
   
   if ($_SESSION["result"]==true) {

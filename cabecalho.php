@@ -111,33 +111,28 @@
             <div class="custom-btn-2">
                 
                 <h1>Guia</h1>
-                <?php
-                if(autenticado()&&usu()){
-                ?>
-                <p>Tipo: <strong><i><?=$_SESSION["tipo"]?></i></strong></p>
-                                <?php
-                     }
-                ?>
-
-            </div>
+                <p>Tipo: <strong><i><?=$_SESSION["tipo"]?></i></strong>
+                </p>
+            </div></p>
 
             <nav class="nav flex-column">
+                <a class="nav-link" href="listagemusu.php">💿 Usuarios</a>
+                <?php
+                if(autenticado()&&fun()){
+                ?>
+                <a class="nav-link" href="formArtista.php">🎤 Cadastro de Artistas</a>
+                <a class="nav-link" href="formMusica.php">🎧 Cadastro de Músicas</a>
+                <a class="nav-link" href="listagemMusica.php">🎧 Musicas</a>
+                <?php
+                }else{ 
+                ?>
+                    <a class="nav-link" href="musicafav.php">❤️ Musicas Favoritas</a>
+                    <a class="nav-link" href="artistafav.php">⭐ Artistas Favoritos</a>
+                    <a class="nav-link" href="listagemcardsMusica.php">🎧 Músicas</a>
+                <?php
+                }
+                ?>
                 <a class="nav-link" href="listagemart.php">🎤 Artistas</a>
-                <a class="nav-link" href="listagemMusica.php">🎧 Músicas</a>
-                <?php
-                if(autenticado()&&usu()){
-                ?>
-                <a class="nav-link" href="musicafav.php">❤️ Musicas Favoritas</a>
-                <a class="nav-link" href="artistafav.php">⭐ Artistas Favoritos</a>
-                <?php
-                     }elseif(fun()){
-                ?>
-                    <a class="nav-link" href="listagemusu.php">Cadastrar Músicas</a> 
-                    <a class="nav-link" href="listagemusu.php">💿Usuarios</a> 
-                <?php
-                     }
-                ?>
-                <a class="nav-link" href="listagemusu.php">💿Usuarios</a> 
             </nav>
         </div>
     </div>

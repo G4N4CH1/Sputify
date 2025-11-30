@@ -90,7 +90,7 @@ $stmt = $conn->query($sql);
         </div>
           
         <div class="col-sm-2">
-            <button class="btn custom-btn">
+            <button class="btn btn-primary">
                 <i data-feather="search"></i>Pesquisar
             </button>
         </div>
@@ -160,7 +160,7 @@ if($stmt->rowCount() == 0){
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="id")?"id_art desc":"id_art";?>">ID
+                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="id_art")?"id_art desc":"id_art";?>">ID
                     <?php if ($ordem == "id_art") echo"⬇️"; ?>
                     <?php if ($ordem =="id_art desc") echo "⬆️";?>
                 </a></th>
@@ -169,12 +169,12 @@ if($stmt->rowCount() == 0){
                     <?php if ($ordem =="nome_art desc") echo "⬆️";?>
                 </a></th>
                 <th scope="col" style="widht: 30%;">Gênero</th>
-                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"qtd_membros desc":"qtd_membros";?>">Quantidade de Membros
+                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"_membros desc":"qtd_membros";?>">Quantidade de Membros
                     <?php if ($ordem == "qtd_membros") echo"⬇️"; ?>
                     <?php if ($ordem =="qtd_membros desc") echo "⬆️";?>
                 </a></th>
                 
-                <th scope="col" style="widht: 30%;">Páis de Origem</th>
+                <th scope="col" style="widht: 30%;">País de Origem</th>
                 <th scope="col" style="widht: 30%;"></th>
             </tr>
         </thead>
@@ -188,32 +188,46 @@ if($stmt->rowCount() == 0){
                 <td><?=$row["genero_musica"]?></td>
                 <td><?=$row["qtd_membros"]?></td>
                 <td><?=$row["pais_origem"]?></td>
-                <td><a href="" class="link-warning">
-                    
-                        <?php
-                        if(autenticado()&&usu()){
-                            if(!empty($row["artistafav"])){
-                                ?>
-                                <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=<?=$row['artistafav']?>&pagina=listagemart.php" class="link-warning">
-                                    <span data-feather="star" style="color: gold; fill: gold;stroke:gold;"></span>
-                                    </a>
-                                <?php
-                            }else{
-                                ?>
-                                <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=&pagina=listagemart.php" class="link-warning">
-                                    <span data-feather="star" ></span></a>
-                                <?php
-                            }}
+                <td>
+                    <?php
+                    if(autenticado() && usu()){
+                        if(!empty($row["artistafav"])){
                         ?>
-                        
-                        
-                    
+                            <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=<?=$row['artistafav']?>&pagina=listagemart.php" class="link-warning">
+                            <span data-feather="star" style="color: gold; fill: gold; stroke:gold;"></span>
+                            </a>
+                        <?php
+                        } else {
+                        ?>
+                            <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=&pagina=listagemart.php" class="link-warning">
+                            <span data-feather="star"></span>
+                            </a>
+                        <?php
+                        }
+                    }
+                    ?>
+                </td>
+
+                <?php if(autenticado()&&fun()){  ?>
+                <td>
+                    <a href="formaltArtista.php?id=<?=$row["id_art"]?>" class="btm btn-sm btn-warning">
+                        <span data-feather="edit"></span>
+                        Editar
+                    </a>
+                </td>
+                <td>
+                    <a href="excluirArtista.php?id=<?=$row["id_art"]?>" class="btm btn-sm btn-danger" onclick="if(!confirm('Certezas ?')) return false;">
+                        <span data-feather="trash-2"></span>
+                        Excluir
+                    </a>
                 </td>
             </tr>
+            <?php
+             }}
+            ?>
         </tbody>
     </table>
 </div> 
 <?php 
-}
 require 'rodape.php';
 ?>

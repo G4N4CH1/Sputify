@@ -2,7 +2,7 @@
 session_start();
 require "autenticacao.php";
 
-$titulo_pagina= "Formulario de Usuario";
+$titulo_pagina= "Formulario de Usuário";
 require 'cabecalho.php';
 ?>
   
@@ -40,7 +40,7 @@ require 'cabecalho.php';
                 <label for="tipo" class="form-label">Tipo</label>
                 <select class="form-select" name="tipo" id="tipo">
                   <option value="">Escolha uma Opção</option>
-                  <option value="FUN">Funcionario</option>
+                  <option value="FUN">Funcionário</option>
                   <option value="USU">Usuário</option>
             </div>
             <div class="mb-3">

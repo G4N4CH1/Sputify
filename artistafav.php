@@ -93,7 +93,7 @@ $stmt = $conn->query($sql);
         </div>
           
         <div class="col-sm-2">
-            <button class="btn custom-btn">
+            <button class="btn btn-primary">
                 <i data-feather="search"></i>Pesquisar
             </button>
         </div>
@@ -210,10 +210,12 @@ if($stmt->rowCount() == 0){
                     </a>
                 </td>
             </tr>
+            <?php
+                }
+            ?>
         </tbody>
     </table>
 </div> 
 <?php 
-}
 require 'rodape.php';
 ?>
