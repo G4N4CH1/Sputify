@@ -4,6 +4,14 @@ require "autenticacao.php";
 $titulo_pagina="Listagem de Artistas";
 require 'cabecalho.php';
 require 'conexao.php';
+if(!autenticado()){
+    redireciona();
+    die();
+  }
+if(fun()){
+    redireciona();
+    die();
+  }
 
 $exibir_busca=false;
 $sql_busca="";
@@ -21,12 +29,12 @@ if(!empty($_POST["busca"])){
     switch ($tipo_busca) {
         case 'id':
             $idbusca= intval($busca);
-            $sql_busca=" WHERE a.id_art = '$idbusca'  ";
+            $sql_busca=" WHERE id_art = '$idbusca'  ";
             break;
             
         case 'qtd':
             $qtdbusca= intval($busca);
-            $sql_busca=" WHERE qtd_membros = '$qtdbusca'   ";
+            $sql_busca=" WHERE qtd_memebros = '$qtdbusca'   ";
             break;
             
         case 'nome':
@@ -50,23 +58,18 @@ if(!empty($_POST["busca"])){
 }
 
 if(!empty($_GET["ordem"])){ 
-    $valid_orders = ["id_art", "id_art desc", "nome_art","nome_art desc" , "qtd_membros", "qtd_membros desc"]; 
+    $valid_orders = ["id", "id desc", "nome","nome desc" , "qtd", "qtd desc"]; 
     $ordem = "nome";  
     if (isset($_GET["ordem"]) && in_array($_GET["ordem"], $valid_orders)) { 
         $ordem = $_GET["ordem"]; 
     } 
 }
-if(autenticado()&&usu()){
-    $id_usu=id_usu();
-    $sql = "SELECT a.id_art, nome_art, genero_musica, qtd_membros, pais_origem, af.id_af as artistafav FROM artista a 
-            left join artistafav af on af.id_art = a.id_art and af.id_usu=$id_usu 
-            $sql_busca order by $ordem";
-$stmt = $conn->query($sql);
-}else{
-$sql=" SELECT id_art, nome_art, genero_musica, qtd_membros, pais_origem FROM artista $sql_busca order by $ordem";
-$stmt = $conn->query($sql);
-}
+$id_usu=id_usu();
 
+$sql = "SELECT a.id_art, nome_art, genero_musica, qtd_membros, pais_origem, af.id_af as artistafav FROM artista a 
+        join artistafav af on af.id_art = a.id_art and af.id_usu=$id_usu 
+        $sql_busca order by $ordem";
+$stmt = $conn->query($sql);
 
 
 ?>
@@ -156,24 +159,23 @@ if($stmt->rowCount() == 0){
     }
 }
 ?>
-<div class="table-responsive corpo">
+<div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="id")?"id_art desc":"id_art";?>">ID
-                    <?php if ($ordem == "id_art") echo"⬇️"; ?>
-                    <?php if ($ordem =="id_art desc") echo "⬆️";?>
+                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="id")?"id desc":"id";?>">ID
+                    <?php if ($ordem == "id") echo"⬇️"; ?>
+                    <?php if ($ordem =="id desc") echo "⬆️";?>
                 </a></th>
-                <th scope="col" style="widht: 30%;"><a href="?ordem=<?=($ordem =="nome")?"nome_art desc":"nome_art";?>">Nome
-                    <?php if ($ordem == "nome_art") echo"⬇️"; ?>
-                    <?php if ($ordem =="nome_art desc") echo "⬆️";?>
+                <th scope="col" style="widht: 30%;"><a href="?ordem=<?=($ordem =="nome")?"nome desc":"nome";?>">Nome
+                    <?php if ($ordem == "nome") echo"⬇️"; ?>
+                    <?php if ($ordem =="nome desc") echo "⬆️";?>
                 </a></th>
                 <th scope="col" style="widht: 30%;">Gênero</th>
-                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"_membros desc":"qtd_membros";?>">Quantidade de Membros
-                    <?php if ($ordem == "qtd_membros") echo"⬇️"; ?>
-                    <?php if ($ordem =="qtd_membros desc") echo "⬆️";?>
+                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"qtd desc":"qtd";?>">Quantidade de Membros
+                    <?php if ($ordem == "qnt") echo"⬇️"; ?>
+                    <?php if ($ordem =="qnt desc") echo "⬆️";?>
                 </a></th>
-                
                 <th scope="col" style="widht: 30%;">Páis de Origem</th>
                 <th scope="col" style="widht: 30%;"></th>
             </tr>
@@ -191,23 +193,21 @@ if($stmt->rowCount() == 0){
                 <td><a href="" class="link-warning">
                     
                         <?php
-                        if(autenticado()&&usu()){
                             if(!empty($row["artistafav"])){
                                 ?>
-                                <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=<?=$row['artistafav']?>&pagina=listagemart.php" class="link-warning">
+                                <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=<?=$row['artistafav']?>&pagina=artistafav.php" class="link-warning">
                                     <span data-feather="star" style="color: gold; fill: gold;stroke:gold;"></span>
-                                    </a>
                                 <?php
                             }else{
                                 ?>
-                                <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=&pagina=listagemart.php" class="link-warning">
-                                    <span data-feather="star" ></span></a>
+                                <a href="favoritaArt.php?id=<?=$row['id_art']?>&favorito=&pagina=artistafav.php" class="link-warning">
+                                    <span data-feather="star" ></span>
                                 <?php
-                            }}
+                            }
                         ?>
                         
                         
-                    
+                    </a>
                 </td>
             </tr>
         </tbody>

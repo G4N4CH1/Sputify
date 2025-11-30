@@ -24,7 +24,7 @@ function redireciona($pagina=null){
     header("Location: $pagina");
 }
 function usu(){
-    if(isset($_SESSION["tipo"]) && $_SESSION["tipo"=="USU"]){
+    if(isset($_SESSION["tipo"]) && $_SESSION["tipo"]=="USU"){
         return true;
 
      }else{
@@ -32,7 +32,7 @@ function usu(){
      }
 }
 function fun(){
-    if(isset($_SESSION["tipo"]) && $_SESSION["tipo"=="FUN"]){
+    if(isset($_SESSION["tipo"]) && $_SESSION["tipo"]=="FUN"){
         return true;
 
      }else{

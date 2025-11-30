@@ -1,19 +1,20 @@
 <?php 
 session_start();
 require'autenticacao.php';
-$titulo_pagina= "Inicio";
+$titulo_pagina= "Início";
 require 'cabecalho.php';
 if(!autenticado()){?>
-    <p class="display-4">Seja bem vindo. </p>
-    <p>Faça o Login ou Cadastre-se</p>
+    <div class="text-center"><p class="display-6">Seja bem vindo. </p>
+        <p>Faça o Login ou Cadastre-se</p>
+    </div>
 <?php
 
 }else{?>
    
-    <p class="display-4">
+    <p class="display-4 text-center">
         Olá, <strong>"<?=$_SESSION["nome"]?>"</strong>.<br>
     </p>
-    <p> Tipo:<strong>"<?=$_SESSION["tipo"]?>"</strong></p>
+    <p class="text-center"> Tipo de Usuário:<strong>"<?=$_SESSION["tipo"]?>"</strong></p>
     
 <?php
 }

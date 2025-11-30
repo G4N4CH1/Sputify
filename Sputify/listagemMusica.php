@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require "autenticacao.php";
-$titulo_pagina="Listagem de Artistas";
+$titulo_pagina="Listagem de Músicas";
 require 'cabecalho.php';
 require 'conexao.php';
 

@@ -55,7 +55,6 @@ if (isset($_SESSION["result"])) {
                 <th scope="col" style="widht: 25%;">Nome</th>
                 <th scope="col" style="widht: 15%;">Email</th>
                 <th scope="col" style="widht: 15%;">Tipo</th>
-                <th scope="col" style="widht: 15%;">Excluir</th>
               
                
                 <?php
@@ -73,30 +72,28 @@ if (isset($_SESSION["result"])) {
                 <td><?=$row["tipo"]?></td>
                 
                     <?php
-                    if(autenticado()){
-                        ?>
-                        
-                            <?php
-                            if(id_usu()==$row['id_usu']){
-                                ?>
-                                  <td>
-                                     <a href="excluirusu.php?id_usu=<?=$row["id_usu"]?>" class="" onclick="if(!confirm('Certezas ?')) return false;">
-                                    <span data-feather="trash-2"></span>
-                                    Excluir
-                                </a>
-                                </td>
-                      
-
-                                       
-                                <?php
-                            }
-                            ?>
-                           
-                        
-                        
-                        <?php
+                  if (autenticado()) {
+    if (fun()) {
+        // Funcionário: pode excluir qualquer usuário
+        ?>
+        <td>
+            <a href="excluirusu.php?id_usu=<?=$row["id_usu"]?>" onclick="return confirm('Certeza?')">
+                <span data-feather="trash-2"></span> Excluir
+            </a>
+        </td>
+        <?php
+    } elseif (id_usu() == $row['id_usu']) {
+        // Usuário comum: só pode excluir a própria conta
+        ?>
+        <td>
+            <a href="excluirusu.php?id_usu=<?=$row["id_usu"]?>" onclick="return confirm('Certeza?')">
+                <span data-feather="trash-2"></span> Excluir
+            </a>
+        </td>
+        <?php
+    }
+}
                     }
-                }
             ?>
         </tbody>
     </table>

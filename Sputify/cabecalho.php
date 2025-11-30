@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MusicFlow</title>
+    <title>Sputify</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
@@ -54,13 +54,14 @@
         }
         .custom-btn-2 {
             border: none;
-            padding: 12px 26px;
+            padding: 10px 26px;
             border-radius: 30px;
             font-weight: 500;
             letter-spacing: 0.3px;
             background: #ff8fab;
             transition: 0.25s ease-in-out;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0);
+            color:white;
         }
 
         .custom-btn:hover {
@@ -92,19 +93,39 @@
             border-radius: 25px !important;
             padding: 12px 18px !important;
         }
+        .titulo{
+            background: #fd98b1d8;
+            border-radius: 50px;
+            padding: 12px 26px;
+            width: 1200px;
+            color:#ffffff ;
+        }
+        
     </style>
 </head>
 
 <body>
     <div>
         <div class="sidebar">
-            <h2 class="custom-btn-2">Guia</h2>
+
+            <div class="custom-btn-2">
+                
+                <h1>Guia</h1>
+                <p>Tipo: <strong><i><?=$_SESSION["tipo"]?></i></strong>
+                </p>
+            </div></p>
 
             <nav class="nav flex-column">
-                <a class="nav-link" href="listagemart.php">🎧 Artistas</a>
-                <a class="nav-link" href="listagemMusica.php">📀 Musicas</a>
-                <a class="nav-link" href="favoritaMusica">🎤 Musicas Favoritas</a>
-                <a class="nav-link" href="favoritaArt">⭐ Artistas Favoritos</a>
+                <a class="nav-link" href="listagemart.php">🎤 Artistas</a>
+                <a class="nav-link" href="listagemMusica.php">🎧 Musicas</a>
+                <?php
+                if(autenticado()&&usu()){
+                ?>
+                <a class="nav-link" href="musicafav.php">❤️ Musicas Favoritas</a>
+                <a class="nav-link" href="artistafav.php">⭐ Artistas Favoritos</a>
+                <?php
+                     }
+                ?>
                 <a class="nav-link" href="listagemusu.php">💿 Usuarios</a>
             </nav>
         </div>
@@ -128,9 +149,12 @@
 
     </header>
 
-
+    
     <div class="container mt-5">
-
+         <h1 class="display-1 text-center titulo"> <?=$titulo_pagina ?> </h1>
+                    
+                
+                <br> 
        
 
     </div>
