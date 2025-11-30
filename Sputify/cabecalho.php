@@ -111,22 +111,33 @@
             <div class="custom-btn-2">
                 
                 <h1>Guia</h1>
-                <p>Tipo: <strong><i><?=$_SESSION["tipo"]?></i></strong>
-                </p>
-            </div></p>
+                <?php
+                if(autenticado()&&usu()){
+                ?>
+                <p>Tipo: <strong><i><?=$_SESSION["tipo"]?></i></strong></p>
+                                <?php
+                     }
+                ?>
+
+            </div>
 
             <nav class="nav flex-column">
                 <a class="nav-link" href="listagemart.php">🎤 Artistas</a>
-                <a class="nav-link" href="listagemMusica.php">🎧 Musicas</a>
+                <a class="nav-link" href="listagemMusica.php">🎧 Músicas</a>
                 <?php
                 if(autenticado()&&usu()){
                 ?>
                 <a class="nav-link" href="musicafav.php">❤️ Musicas Favoritas</a>
                 <a class="nav-link" href="artistafav.php">⭐ Artistas Favoritos</a>
                 <?php
+                     }elseif(fun()){
+                ?>
+                    <a class="nav-link" href="listagemusu.php">Cadastrar Músicas</a> 
+                    <a class="nav-link" href="listagemusu.php">💿Usuarios</a> 
+                <?php
                      }
                 ?>
-                <a class="nav-link" href="listagemusu.php">💿 Usuarios</a>
+                <a class="nav-link" href="listagemusu.php">💿Usuarios</a> 
             </nav>
         </div>
     </div>

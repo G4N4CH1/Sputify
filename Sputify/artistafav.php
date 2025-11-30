@@ -93,7 +93,7 @@ $stmt = $conn->query($sql);
         </div>
           
         <div class="col-sm-2">
-            <button class="btn btn-primary">
+            <button class="btn custom-btn">
                 <i data-feather="search"></i>Pesquisar
             </button>
         </div>

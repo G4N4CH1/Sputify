@@ -51,7 +51,7 @@ if(!empty($_POST["busca"])){
 
 if(!empty($_GET["ordem"])){ 
     $valid_orders = ["id_art", "id_art desc", "nome_art","nome_art desc" , "qtd_membros", "qtd_membros desc"]; 
-    $ordem = "nome";  
+    $ordem = "nome_art";  
     if (isset($_GET["ordem"]) && in_array($_GET["ordem"], $valid_orders)) { 
         $ordem = $_GET["ordem"]; 
     } 
@@ -90,7 +90,7 @@ $stmt = $conn->query($sql);
         </div>
           
         <div class="col-sm-2">
-            <button class="btn btn-primary">
+            <button class="btn custom-btn">
                 <i data-feather="search"></i>Pesquisar
             </button>
         </div>
@@ -169,7 +169,7 @@ if($stmt->rowCount() == 0){
                     <?php if ($ordem =="nome_art desc") echo "⬆️";?>
                 </a></th>
                 <th scope="col" style="widht: 30%;">Gênero</th>
-                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"_membros desc":"qtd_membros";?>">Quantidade de Membros
+                <th scope="col" style="widht: 5%;"><a href="?ordem=<?=($ordem =="qtd")?"qtd_membros desc":"qtd_membros";?>">Quantidade de Membros
                     <?php if ($ordem == "qtd_membros") echo"⬇️"; ?>
                     <?php if ($ordem =="qtd_membros desc") echo "⬆️";?>
                 </a></th>
